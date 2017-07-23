@@ -1,26 +1,27 @@
 // Build in
 const fs = require('fs')
 const _ = require('lodash')
+const yargs = require('yargs')
 
 const notes = require('./notes')
 
-const command = process.argv[2]
-console.log('Command:', command)
+const argv = yargs.argv
+const command = argv._[0]
 
-if (command === 'add') {
-  console.log('Adding new note...')
+if (argv._ === 'add') {
+  notes.addNote(argv.title, argv.body)
 }
 
 else if (command === 'list') {
-  console.log('Listing notes...')
+  notes.getAll()
 }
 
 else if (command === 'read') {
-  console.log('Reading note...')
+  notes.getNote(argv.title)
 }
 
 else if (command === 'remove') {
-  console.log('Removing note...')
+  notes.removeNote(argv.title)
 }
 
 else {
