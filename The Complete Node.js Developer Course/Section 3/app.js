@@ -11,10 +11,8 @@ const command = argv._[0]
 if (command === 'add') {
   const note = notes.addNote(argv.title, argv.body)
   if (note) {
-    console.log('Created...')
-    console.log('--')
-    console.log(`Title: ${note.title}`)
-    console.log(`Body: ${note.body}`)
+    console.log('Created!')
+    notes.logNote(note)
   } else {
     console.log('Duplicate note...')
   }
@@ -25,7 +23,14 @@ else if (command === 'list') {
 }
 
 else if (command === 'read') {
-  notes.getNote(argv.title)
+  const note = notes.getNote(argv.title)
+
+  if (note) {
+    console.log('Found!')
+    notes.logNote(note)
+  } else {
+    console.log('Note not found...')
+  }
 }
 
 else if (command === 'remove') {
