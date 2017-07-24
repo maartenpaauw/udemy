@@ -9,7 +9,15 @@ const argv = yargs.argv
 const command = argv._[0]
 
 if (command === 'add') {
-  notes.addNote(argv.title, argv.body)
+  const note = notes.addNote(argv.title, argv.body)
+  if (note) {
+    console.log('Created...')
+    console.log('--')
+    console.log(`Title: ${note.title}`)
+    console.log(`Body: ${note.body}`)
+  } else {
+    console.log('Duplicate note...')
+  }
 }
 
 else if (command === 'list') {
