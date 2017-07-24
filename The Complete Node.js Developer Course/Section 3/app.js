@@ -19,7 +19,9 @@ if (command === 'add') {
 }
 
 else if (command === 'list') {
-  notes.getAll()
+  const all = notes.getAll()
+  console.log(`Printing ${all.length} note(s).`)
+  all.forEach((note) => notes.logNote(note))
 }
 
 else if (command === 'read') {
