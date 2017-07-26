@@ -1,7 +1,21 @@
 const request = require('request')
+const yargs = require('yargs')
+
+const argv = yargs
+  .options({
+    address: {
+      demand: true,
+      alias: 'a',
+      describe: 'Address to fetch weather for',
+      string: true
+    }
+  })
+  .help()
+  .alias('help', 'h')
+  .argv
 
 request({
-  url: 'http://maps.googleapis.com/maps/api/geocode/json?address=brouwerstraat%2037%20rijnsburg%20nederland',
+  url: `http://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(argv.address)}`,
   json: true
 }, (error, response, body) => {
   console.log(`Address: ${body.results[0].formatted_address}`)
