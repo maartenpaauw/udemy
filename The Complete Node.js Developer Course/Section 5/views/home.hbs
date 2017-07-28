@@ -6,11 +6,8 @@
   </head>
 
   <body>
-    <h1>{{ title }}</h1>
-    <p>{{ welcome }}</p>
-
-    <footer>
-      <p>&copy; Copyright {{ year }}</p>
-    </footer>
+    {{> header }}
+    <p>{{ uppercase welcome }}</p>
+    {{> footer }}
   </body>
 </html>

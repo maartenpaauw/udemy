@@ -3,22 +3,28 @@ const hbs = require('hbs')
 
 const app = express()
 
+hbs.registerPartials(`${__dirname}/views/partials`)
 app.set('view engine', 'hbs')
-
 app.use(express.static(`${__dirname}/public`))
+
+hbs.registerHelper('year', () => {
+  return new Date().getFullYear()
+})
+
+hbs.registerHelper('uppercase', (text) => {
+  return text.toUpperCase()
+})
 
 app.get('/', (req, res) => {
   res.render('home.hbs', {
     title: 'Home',
-    welcome: 'Welcome to my website.',
-    year: new Date().getFullYear()
+    welcome: 'Welcome to my website.'
   })
 })
 
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
-    title: 'About',
-    year: new Date().getFullYear()
+    title: 'About'
   })
 })
 
