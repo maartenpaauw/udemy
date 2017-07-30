@@ -1,62 +1,27 @@
-const mongoose = require('mongoose')
+const express = require('express')
+const bodyParser = require('body-parser')
 
-mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost:27017/todo', { useMongoClient: true })
+const { mongoose } = require('./db/mongoose')
+const { Todo } = require('./models/todo')
+const { User } = require('./models/user')
 
-const Todo = mongoose.model('Todo', {
-  text: {
-    type: String,
-    required: true,
-    minLength: 1,
-    trim: true
-  },
-  completed: {
-    type: Boolean,
-    default: false
-  },
-  completedAt: {
-    type: Number,
-    default: null
-  }
+var app = express()
+
+app.use(bodyParser.json())
+
+app.post('/todos', (req, res) => {
+
+  const todo = new Todo({
+    text: req.body.text
+  })
+
+  todo.save().then((doc) => {
+    res.send(doc)
+  }, (err) => {
+    res.status(400).send(err)
+  })
 })
 
-const todo1 = new Todo({
-  text: 'TODO 1'
-})
-
-todo1.save().then((result) => {
-  console.log(result)
-}, (err) => {
-  console.error(err)
-})
-
-const todo2 = new Todo({
-  text: 'TODO 2',
-  completed: true,
-  completedAt: 123
-})
-
-todo2.save().then((result) => {
-  console.log(result)
-}, (err) => {
-  console.error(err)
-})
-
-const User = mongoose.model('User', {
-  email: {
-    required: true,
-    trim: true,
-    type: String,
-    minLength: 1
-  }
-})
-
-const maartenpaauw = new User({
-  email: 'maartenpaauw@gmail.com'
-})
-
-maartenpaauw.save().then((result) => {
-  console.log(result)
-}, (err) => {
-  console.error(err)
+app.listen(3000, () => {
+  console.log('Listening on http://localhost:3000/')
 })
