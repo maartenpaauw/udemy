@@ -1,32 +1,41 @@
 const expect = require('expect')
 const utils = require('./utils')
 
-it('should add two numbers', () => {
-  const res = utils.add(33, 11)
-  expect(res).toBe(44).toBeA('number')
-})
+describe('Utils', () => {
 
-it('should add two numbers asynchronous', (done) => {
-  utils.asyncAdd(4, 3, (res) => {
-    expect(res).toBe(7).toBeA('number')
-    done()
+  describe('#add', () => {
+    it('should add two numbers', () => {
+      const res = utils.add(33, 11)
+      expect(res).toBe(44).toBeA('number')
+    })
+
+    it('should add two numbers asynchronous', (done) => {
+      utils.asyncAdd(4, 3, (res) => {
+        expect(res).toBe(7).toBeA('number')
+        done()
+      })
+    })
   })
-})
 
-it('should subtract two numbers', () => {
-  const res = utils.subtract(33, 11)
-  expect(res).toBe(22).toBeA('number')
-})
+  describe('#subtract', () => {
+    it('should subtract two numbers', () => {
+      const res = utils.subtract(33, 11)
+      expect(res).toBe(22).toBeA('number')
+    })
+  })
 
-it('should square two numbers', () => {
-  const res = utils.square(2, 2)
-  expect(res).toBe(4).toBeA('number')
-})
+  describe('#square', () => {
+    it('should square two numbers', () => {
+      const res = utils.square(2, 2)
+      expect(res).toBe(4).toBeA('number')
+    })
 
-it('should square two numbers asynchronous', (done) => {
-  utils.asyncSquare(2, 2, (res) => {
-    expect(res).toBe(4).toBeA('number')
-    done()
+    it('should square two numbers asynchronous', (done) => {
+      utils.asyncSquare(2, 2, (res) => {
+        expect(res).toBe(4).toBeA('number')
+        done()
+      })
+    })
   })
 })
 
