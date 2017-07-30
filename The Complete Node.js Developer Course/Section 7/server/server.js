@@ -5,13 +5,18 @@ mongoose.connect('mongodb://localhost:27017/todo', { useMongoClient: true })
 
 const Todo = mongoose.model('Todo', {
   text: {
-    type: String
+    type: String,
+    required: true,
+    minLength: 1,
+    trim: true
   },
   completed: {
-    type: Boolean
+    type: Boolean,
+    default: false
   },
   completedAt: {
-    type: Number
+    type: Number,
+    default: null
   }
 })
 
@@ -31,7 +36,26 @@ const todo2 = new Todo({
   completedAt: 123
 })
 
- todo2.save().then((result) => {
+todo2.save().then((result) => {
+  console.log(result)
+}, (err) => {
+  console.error(err)
+})
+
+const User = mongoose.model('User', {
+  email: {
+    required: true,
+    trim: true,
+    type: String,
+    minLength: 1
+  }
+})
+
+const maartenpaauw = new User({
+  email: 'maartenpaauw@gmail.com'
+})
+
+maartenpaauw.save().then((result) => {
   console.log(result)
 }, (err) => {
   console.error(err)
