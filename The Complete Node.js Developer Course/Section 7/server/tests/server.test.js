@@ -259,6 +259,5 @@ describe('Server', () => {
         .expect(400)
         .end(done)
     })
-
   })
 })
