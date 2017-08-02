@@ -20,6 +20,7 @@ describe('Server', () => {
 
       request(app)
         .post('/todos')
+        .set('x-auth', users[0].tokens[0].token)
         .send({
           text
         })
@@ -43,6 +44,7 @@ describe('Server', () => {
     it('should not create todo with invalid body data', (done) => {
       request(app)
         .post('/todos')
+        .set('x-auth', users[0].tokens[0].token)
         .send({})
         .expect(400)
         .end((err, res) => {
@@ -62,9 +64,10 @@ describe('Server', () => {
     it('should get all todos', (done) => {
       request(app)
         .get('/todos')
+        .set('x-auth', users[0].tokens[0].token)
         .expect(200)
         .expect((res) => {
-          expect(res.body.todos.length).toBe(5)
+          expect(res.body.todos.length).toBe(3)
         })
         .end(done)
     })
