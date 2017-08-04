@@ -32,3 +32,20 @@ $('#message-form').on('submit', function (e) {
     $('[name=message]').val('')
   })
 })
+
+var $locationButton = $('#send-location')
+
+$locationButton.on('click', function () {
+  if(!navigator.geolocation) {
+    return alert('No GEO location support.')
+  }
+
+  navigator.geolocation.getCurrentPosition(function(position) {
+    socket.emit('createLocationMessage', {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+    })
+  }, function() {
+    alert('Something went wrong...')
+  })
+})

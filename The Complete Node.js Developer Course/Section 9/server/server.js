@@ -26,7 +26,10 @@ io.on('connection', (socket) => {
 
     io.emit('newMessage', generateMessage(message.from, message.text))
     callback('This is from the server.')
-    // socket.broadcast.emit('newMessage', generateMessage(message.from, message.text))
+  })
+
+  socket.on('createLocationMessage', (coords) => {
+    io.emit('newMessage', generateMessage('Admin', `Lat: ${coords.latitude}, Lng: ${coords.longitude}`))
   })
 
   socket.on('disconnect', () => {
