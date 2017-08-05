@@ -1,5 +1,20 @@
 const socket = io()
 
+function scrollToBottom () {
+  const $messages = $('#messages')
+  const $newMessage = $messages.children('li:last-child')
+
+  const clientHeight = $messages.prop('clientHeight')
+  const scrollTop = $messages.prop('scrollTop')
+  const scrollHeight = $messages.prop('scrollHeight')
+  const newMessageHeight = $newMessage.innerHeight()
+  const lastMessageHeight = $newMessage.prev().innerHeight()
+
+  if (clientHeight + scrollTop + newMessageHeight + lastMessageHeight >= scrollHeight) {
+    $messages.scrollTop(scrollHeight)
+  }
+}
+
 socket.on('connect', function () {
   console.log('Connected to server')
 })
@@ -17,17 +32,8 @@ socket.on('newMessage', function (message) {
     created_at: time
   })
   $('#messages').append(html)
-  // const li = $('<li></li>')
-  // li.text(`${message.from} ${time}: ${message.text}`)
-  // $('#messages').append(li)
+  scrollToBottom()
 })
-
-// socket.emit('createMessage', {
-//   from: 'Frank',
-//   text: 'Hi!'
-// }, function (message) {
-//   console.log('Got it!', message)
-// })
 
 socket.on('newLocationMessage', function (message) {
   const template = $('#location-message-template').html()
@@ -38,13 +44,12 @@ socket.on('newLocationMessage', function (message) {
     created_at: time
   })
   $('#messages').append(html)
+  scrollToBottom()
 })
 
 $('#message-form').on('submit', function (e) {
   e.preventDefault()
-
   $message = $('[name=message]')
-
   socket.emit('createMessage',  {
     from: 'User',
     text: $message.val()
@@ -52,16 +57,12 @@ $('#message-form').on('submit', function (e) {
     $message.val('')
   })
 })
-
 var $locationButton = $('#send-location')
-
 $locationButton.on('click', function () {
   if(!navigator.geolocation) {
     return alert('No GEO location support.')
   }
-
   $locationButton.attr('disabled', 'disabled').text('Sending location...')
-
   navigator.geolocation.getCurrentPosition(function(position) {
     $locationButton.removeAttr('disabled').text('Send location')
     socket.emit('createLocationMessage', {
