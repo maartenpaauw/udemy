@@ -70,7 +70,6 @@ $('#message-form').on('submit', function (e) {
   e.preventDefault()
   $message = $('[name=message]')
   socket.emit('createMessage',  {
-    from: 'User',
     text: $message.val()
   }, function () {
     $message.val('')
