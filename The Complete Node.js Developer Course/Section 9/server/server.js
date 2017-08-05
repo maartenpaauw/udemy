@@ -22,6 +22,8 @@ io.on('connection', (socket) => {
     if(!isRealString(params.name) || !isRealString(params.room)) {
       callback('Name and room are required.')
     }
+
+    
     socket.join(params.room)
 
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat application.'))
