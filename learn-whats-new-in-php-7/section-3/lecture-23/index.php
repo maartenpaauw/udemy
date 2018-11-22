@@ -12,7 +12,14 @@ function step () {
   yield 1;
   yield 2;
   yield 3;
+  yield from moreSteps();
 }
+
+function moreSteps () {
+  yield 4;
+  yield 5;
+  yield 6;
+};
 
 $control = values();
 
