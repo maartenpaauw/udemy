@@ -101,16 +101,20 @@ var Options =
 function (_React$Component4) {
   _inherits(Options, _React$Component4);
 
-  function Options() {
+  function Options(props) {
+    var _this;
+
     _classCallCheck(this, Options);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Options).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Options).call(this, props));
+    _this.handleRemove = _this.handleRemove.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
   }
 
   _createClass(Options, [{
     key: "handleRemove",
     value: function handleRemove() {
-      alert('Handle remove');
+      console.log(this.props.options);
     }
   }, {
     key: "render",
