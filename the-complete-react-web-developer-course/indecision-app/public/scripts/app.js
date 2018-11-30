@@ -32,28 +32,43 @@ function (_React$Component) {
     _this.handleAddOne = _this.handleAddOne.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleMinusOne = _this.handleMinusOne.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleReset = _this.handleReset.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.state = {
+      count: 0
+    };
     return _this;
   }
 
   _createClass(Counter, [{
     key: "handleAddOne",
     value: function handleAddOne() {
-      console.log('Handle Add One');
+      this.setState(function (prevState) {
+        return {
+          count: prevState.count + 1
+        };
+      });
     }
   }, {
     key: "handleMinusOne",
     value: function handleMinusOne() {
-      console.log('Handle Minus One');
+      this.setState(function (prevState) {
+        return {
+          count: prevState.count - 1
+        };
+      });
     }
   }, {
     key: "handleReset",
     value: function handleReset() {
-      console.log('Handle Reset');
+      this.setState(function () {
+        return {
+          count: 0
+        };
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      return React.createElement("div", null, React.createElement("h1", null, "Count:"), React.createElement("button", {
+      return React.createElement("div", null, React.createElement("h1", null, "Count: ", this.state.count), React.createElement("button", {
         onClick: this.handleAddOne
       }, "+"), React.createElement("button", {
         onClick: this.handleMinusOne
