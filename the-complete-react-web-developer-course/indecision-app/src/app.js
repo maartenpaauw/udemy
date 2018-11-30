@@ -72,8 +72,6 @@ class Option extends React.Component {
   }
 }
 
-
-
 class AddOption extends React.Component {
   handleAddOption(e) {
     e.preventDefault();
