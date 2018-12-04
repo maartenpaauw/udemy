@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "watch": "babel src/app.js --out-file=public/scripts/app.js --watch"
+  },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0"
-  },
-  "scripts": {
-    "watch": "node_modules/.bin/babel src/app.js --out-file=public/scripts/app.js --watch"
   }
 }
