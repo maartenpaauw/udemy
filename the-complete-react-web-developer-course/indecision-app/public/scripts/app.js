@@ -32,6 +32,7 @@ function (_React$Component) {
     _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handlePick = _this.handlePick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleAddOption = _this.handleAddOption.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleDeleteOption = _this.handleDeleteOption.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.state = {
       options: props.options
     };
@@ -44,6 +45,17 @@ function (_React$Component) {
       this.setState(function () {
         return {
           options: []
+        };
+      });
+    }
+  }, {
+    key: "handleDeleteOption",
+    value: function handleDeleteOption(optionToRemove) {
+      this.setState(function (prevState) {
+        return {
+          options: prevState.options.filter(function (option) {
+            return option !== optionToRemove;
+          })
         };
       });
     }
@@ -80,7 +92,8 @@ function (_React$Component) {
         handlePick: this.handlePick
       }), React.createElement(Options, {
         options: this.state.options,
-        handleDeleteOptions: this.handleDeleteOptions
+        handleDeleteOptions: this.handleDeleteOptions,
+        handleDeleteOption: this.handleDeleteOption
       }), React.createElement(AddOption, {
         handleAddOption: this.handleAddOption
       }));
@@ -115,13 +128,18 @@ var Options = function Options(props) {
   }, "Remove all"), props.options.map(function (option) {
     return React.createElement(Option, {
       key: option,
-      text: option
+      text: option,
+      handleDeleteOption: props.handleDeleteOption
     });
   }));
 };
 
 var Option = function Option(props) {
-  return React.createElement("div", null, props.text);
+  return React.createElement("div", null, props.text, React.createElement("button", {
+    onClick: function onClick() {
+      props.handleDeleteOption(props.text);
+    }
+  }, "Remove"));
 };
 
 var AddOption =
