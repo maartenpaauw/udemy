@@ -117,6 +117,12 @@ const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
     const textMatch = expense.description.toLowerCase().includes(text.toLowerCase());
 
     return startDateMatch && endDateMatch && textMatch;
+  }).sort((a, b) => {
+    if (sortBy === 'date') {
+      return a.createdAt < b.createdAt ? 1 : -1;
+    } else if (sortBy === 'amount') {
+      return a.amount < b.amount ? 1 : -1;
+    }
   });
 };
 
@@ -126,15 +132,15 @@ const store = createStore(combineReducers({
 }));
 
 store.subscribe(() => {
-  const state = store.getState();
-  const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+  const { expenses, filters } = store.getState();
+  const visibleExpenses = getVisibleExpenses(expenses, filters);
   console.log(visibleExpenses);
 });
 
 const expenseOne = store.dispatch(addExpense({
   description: 'Huur',
   amount: 50000,
-  createdAt: 1000,
+  createdAt: -21000,
 }));
 
 const expenseTwo = store.dispatch(addExpense({
@@ -150,11 +156,11 @@ const expenseTwo = store.dispatch(addExpense({
 //   { amount: 500 },
 // ));
 
-store.dispatch(setTextFilter('Huur'));
+// store.dispatch(setTextFilter('Huur'));
 // store.dispatch(setTextFilter(''));
 
-// store.dispatch(sortByAmount());
-// store.dispatch(sortByDate());
+store.dispatch(sortByDate());
+store.dispatch(sortByAmount());
 
 // store.dispatch(setStartDate(0));
 // store.dispatch(setStartDate());
