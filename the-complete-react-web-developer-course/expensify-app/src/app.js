@@ -13,13 +13,9 @@ import './styles/styles.scss';
 
 const store = configureStore();
 
-store.dispatch(addExpense({description: 'Water bill', amount: 4500 }));
-store.dispatch(addExpense({description: 'Gas bill'}));
-store.dispatch(setTextFilter('water'));
-
-const { expenses, filters } = store.getState();
-const visibleExpenses = getVisibleExpenses(expenses, filters);
-console.log(visibleExpenses);
+store.dispatch(addExpense({description: 'Water', amount: 4500 }));
+store.dispatch(addExpense({description: 'Gas', createdAt: 1000 }));
+store.dispatch(addExpense({description: 'Rent', amount: 109500 }));
 
 const jsx = (
     <Provider store={store}>
