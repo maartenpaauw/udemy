@@ -1,0 +1,19 @@
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    <p>{{ sayHello() }}</p>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            title: 'Hello world!'
+        },
+        methods: {
+            sayHello: function () {
+                return this.title;
+            }
+        }
+    });
+</script>

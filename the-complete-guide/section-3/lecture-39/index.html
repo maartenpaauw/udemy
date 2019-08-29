@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Section 3 - Lecture 39</title>
+        <script src="https://unpkg.com/vue"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>Ingredients</h1>
+            <ul>
+                <li v-for="(ingredient, index) in ingredients">{{ ingredient }} ({{ index + 1 }})</li>
+            </ul>
+        </div>
+
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    ingredients: ['meat', 'fruit', 'cookies'],
+                    persons: [
+                        { name: 'Maarten', age: 24, color: 'red' },
+                        { name: 'Rianne', age: 23, color: 'blue' }
+                    ]
+                }
+            });
+        </script>
+    </body>
+</html>

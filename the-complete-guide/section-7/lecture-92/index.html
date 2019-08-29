@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Section 7 - Lecture 92</title>
+
+        <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <my-cmp></my-cmp>
+            <hr>
+            <my-cmp></my-cmp>
+        </div>
+        <script>
+            Vue.component('my-cmp', {
+                data () {
+                    return {
+                        status: 'Critical'
+                    };
+                },
+                template: `
+                    <p>
+                        Server Status: {{ status }} <button @click="changeStatus()">Change</button>
+                    </p>
+                `,
+                methods: {
+                    changeStatus: function () {
+                        this.status = 'Normal'
+                    }
+                }
+            });
+
+            new Vue({
+                el: '#app'
+            });
+        </script>
+    </body>
+</html>

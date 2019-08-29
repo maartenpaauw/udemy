@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Section 2 - Lecture 25</title>
+
+        <script src="https://unpkg.com/vue"></script>
+    </head>
+    <body>
+        <div id="app">
+            <button @click="changeLink">Click to change the link</button>
+            <a :href="link">Link</a>
+        </div>
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    link: 'http://google.com/'
+                },
+                methods: {
+                    changeLink: function () {
+                        this.link = 'http://apple.com/'
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
